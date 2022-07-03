@@ -7,7 +7,6 @@ answer = 0
 flag = True
 
 for i in range(len(lis)):
-    print(i,lis[i])
     if i==0 and lis[i]=='':
         flag = False #다음수는 음수처리
         continue

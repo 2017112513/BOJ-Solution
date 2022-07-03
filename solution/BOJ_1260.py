@@ -1,5 +1,3 @@
-from tracemalloc import start
-
 
 def bfs(start_point):
 
@@ -21,7 +19,7 @@ def bfs(start_point):
 
 def dfs(start_point):
     visited[start_point] = 1
-    print(dic)
+
     for i in dic[start_point]:
         if not visited[i]:
             print(i)
