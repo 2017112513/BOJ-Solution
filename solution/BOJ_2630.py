@@ -47,7 +47,8 @@ dy = [0,0,1,-1]
 
 bfs(n,arr)
 
-print(answer)
+print(answer[0])
+print(answer[1])
 
 
 
