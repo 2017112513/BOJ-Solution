@@ -19,11 +19,10 @@ for num,strike,ball in arr:
                 s+=1
             elif int(num[i]) in c_lis:
                 b+=1
-        print(c_lis,num,s,b)
         if s==int(strike) and b==int(ball):
             new_c.append(c_lis)
 
     c= new_c
 
-print(c)
+
 print(len(c))

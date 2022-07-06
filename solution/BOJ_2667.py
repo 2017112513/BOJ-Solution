@@ -44,5 +44,6 @@ for i,j in one:
 
 
 print(answer)
+cnt_list = sorted(cnt_list)
 for i in cnt_list:
     print(i)

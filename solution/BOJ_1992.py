@@ -40,8 +40,6 @@ from collections import deque
 input =  sys.stdin.readline
 n =  int(input())
 arr = [list(input().strip()) for _ in range(n)]
-print(arr)
-
 answer=''
 
 dx=[1,-1,0,0]

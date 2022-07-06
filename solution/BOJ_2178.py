@@ -25,7 +25,6 @@ arr = [list(input()) for _ in range(n)]
 h = []
 
 visited = [[0] * m for _ in range(n)]
-print(arr)
 heappush(h,[1,0,0]) # cnt, x, y
 answer = bfs()
 print(answer)
