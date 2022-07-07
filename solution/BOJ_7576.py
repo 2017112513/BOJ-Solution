@@ -41,7 +41,7 @@ for i in range(N):
         if graph[i][j] == 0:
             flag = False
             break
-print(graph)
+
 print(answer if flag else -1)
 
 
