@@ -20,18 +20,18 @@ while d:
         print(cnt)
         break
 
-    print(x)
     for i in range(1,6+1):
         if x+i>100:
             continue
         if not graph[x+i]:
             graph[x+i] = cnt+1
-            if dic[x+i] and not graph[dic[x+i]]:
-                graph[dic[x+i]] = cnt+1
-                d.append([cnt+1,dic[x+i]])
+            if dic[x+i]:
+                if not graph[dic[x+i]]:
+                    graph[dic[x+i]] = cnt+1
+                    d.append([cnt+1,dic[x+i]])
+                    print(d)
+        
             else:
                 d.append([cnt+1,x+i])
-
-        else:
-            continue
+                print(d)
 
