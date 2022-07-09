@@ -29,9 +29,9 @@ while d:
                 if not graph[dic[x+i]]:
                     graph[dic[x+i]] = cnt+1
                     d.append([cnt+1,dic[x+i]])
-                    print(d)
+                    # print(d)
         
             else:
                 d.append([cnt+1,x+i])
-                print(d)
+                # print(d)
 
