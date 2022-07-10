@@ -1,42 +1,77 @@
-import heapq
-t = int(input())
-for _ in range(t):
-    k = int(input())
-    visitied = [False]*1000001
-    min_heap,max_heap = [],[]
-    for i in range(k):
-        order,number = input().split()
-        if order == 'I':
-            heapq.heappush(min_heap,(int(number),i))
-            heapq.heappush(max_heap,(-int(number),i))
-            visitied[i] = True
+def search_feed(sx,sy):
+    print('sxsy',sx,sy)
+    feed = []
+    visited = [[0]*N for _ in range(N)]
+    d = deque()
+    d.append([0,sx,sy])
+    visited[sx][sy] = 1
+    while d:
+        for _ in range(len(d)):
+            dis,x,y = d.popleft()
+
+            for i in range(4):
+                a = x+dx[i]
+                b = y+dy[i]
+                
+                if 0<=a<N and 0<=b<N and not visited[a][b] and graph[a][b]<=level:
+                    if 0<graph[a][b]<level:
+                        visited[a][b] = 1
+                        feed.append([dis+1,a,b])
         
-        else:
-            #최소힙구현
-            if number == "-1":
-                #큐에 들어있고 visitied가 False라면 max_heap에서 삭제된 원소
-                while min_heap and not visitied[min_heap[0][1]]:
-                    heapq.heappop(min_heap)
-                if min_heap: #큐에 들어있는경우(visited = True)
-                    visitied[min_heap[0][1]] = False
-                    heapq.heappop(min_heap)
-            #최대힙 구현
-            if number == "1":
-                #큐에 들어있고 visitied가 False라면 min_heap에서 삭제된 원소
-                while max_heap and not visitied[max_heap[0][1]]:
-                    heapq.heappop(max_heap)
-                if max_heap:#큐에 들어있는 경우(visitied = True)
-                    visitied[max_heap[0][1]] = False
-                    heapq.heappop(max_heap)
+                    else:
+                        visited[a][b] = 1
+                        d.append([dis+1,a,b])
+        if feed:
+            feed = sorted(feed,key=lambda x : (-x[1],-x[2]))
+            print(feed)
+            distance,target_x,target_y = feed.pop()
+            return distance,target_x,target_y
+    return 0,0,0
 
-        print(min_heap,max_heap)
-    while min_heap and not visitied[min_heap[0][1]]:
-        heapq.heappop(min_heap)
-    while max_heap and not visitied[max_heap[0][1]]:
-        heapq.heappop(max_heap)
 
-    print(min_heap,max_heap)
-    if len(min_heap)==0 or len(max_heap) == 0:
-        print("EMPTY")
-    else:
-        print(-max_heap[0][0], min_heap[0][0])
+
+
+
+from collections import deque
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+level = 2
+graph = [list(map(int,input().split())) for _ in range(N)]
+
+dx = [1,-1,0,0]
+dy = [0,0,1,-1]
+
+for i in range(N):
+    for j in range(N):
+        if graph[i][j] ==9:
+            graph[i][j] = 0
+            shark_x,shark_y = i,j
+answer = 0
+
+
+
+
+get_feed = 0
+while True:
+    # print(feed)
+    distance,target_x,target_y = search_feed(shark_x,shark_y)
+    print(distance,target_x,target_y)
+    if distance == 0:
+        break
+
+    answer += distance
+    get_feed += 1
+    graph[target_x][target_y] = 0
+    if get_feed == level:
+        level+=1 
+        get_feed = 0
+    shark_x,shark_y = target_x,target_y
+
+
+print(answer)
+
+
+        
+

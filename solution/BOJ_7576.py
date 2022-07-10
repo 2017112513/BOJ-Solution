@@ -12,6 +12,7 @@ def bfs():
             a = x+dx[i]
             b = y+dy[i]
             if 0<=a<N and 0<=b<M and not visited[a][b] and graph[a][b] == 0:
+
                 visited[a][b] = 1
                 graph[a][b] = 1
 
@@ -22,8 +23,13 @@ import sys
 from collections import deque
 
 input = sys.stdin.readline
-M,N = map(int,input().split())
-graph = [list(map(int,input().split())) for _ in range(N)]
+M,N = map(int,input().split()) # 6 4 -> 4 6
+
+
+
+
+graph = [list(map(int,input().split())) for _ in range(N)] 
+
 visited = [[0] * M for _ in range(N)]
 tomato = deque()
 
@@ -45,3 +51,8 @@ for i in range(N):
 print(answer if flag else -1)
 
 
+6 4
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 1
