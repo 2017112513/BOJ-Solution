@@ -54,7 +54,7 @@ feed = search_feed(shark_x,shark_y)
 
 
 while feed:
-    print(feed)
+    # print(feed)
     distance,target_x,target_y = feed.pop()
     visited = [[0]*N for _ in range(N)]
     d = deque()
@@ -97,7 +97,7 @@ while feed:
                         d.append([a,b,0])
                         feed = search_feed(shark_x,shark_y)
                         if feed:
-                            print(feed)
+                            # print(feed)
                             distance,target_x,target_y = feed.pop()
                             break
                 else:
