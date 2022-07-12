@@ -9,8 +9,6 @@ def get_water_cnt(x,y):
                 cnt+=1
     return cnt
 
-
-
 def next_day():
 
     d = deque()
