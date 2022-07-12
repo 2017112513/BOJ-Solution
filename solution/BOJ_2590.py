@@ -38,10 +38,10 @@ def solution(n):
         if arr[3] == 0:
             return 0
         if (arr[3]%4) == 0:
-            cnt = (arr[3]*9)//36
+            cnt = (arr[3])//4
             arr[3] = 0
         else:
-            cnt = (arr[3]*9)//36 + 1
+            cnt = (arr[3])//4 + 1
             arr[3] = arr[3]%4
            
             if arr[3]==3:
@@ -56,9 +56,14 @@ def solution(n):
                         arr[1] -= 9
                     else:
                         arr[1] = 0
+
             elif arr[3] == 2:
                 if arr[2]>3:
                     arr[2] -= 3
+                    if arr[1]>6:
+                        arr[1] -= 6
+                    else:
+                        arr[1] = 0
                 else:
                     sec = arr[2]
                     arr[2]=0
@@ -70,6 +75,10 @@ def solution(n):
             elif arr[3] == 1:
                 if arr[2]>5:
                     arr[2] -= 5
+                    if arr[1]>7:
+                        arr[1] -= 7
+                    else:
+                        arr[1] = 0
                 else:
                     sec = arr[2]
                     arr[2]=0
@@ -86,10 +95,10 @@ def solution(n):
         if arr[2] == 0:
             return 0 
         if (arr[2]%9) == 0:
-            cnt = (arr[2]*4)//36
+            cnt = (arr[2])//9
             arr[2] = 0
         else:
-            cnt = (arr[2]*4)//36 + 1
+            cnt = (arr[2])//9 + 1
             arr[2] = arr[2]%9
             if arr[1]>36-4*arr[2]:
                 arr[1]-= (36-4*arr[2])   
@@ -99,10 +108,11 @@ def solution(n):
 
     else:
         if (arr[1]%36) == 0:
-            cnt = (arr[1]*1)//36
+            cnt = (arr[1])//36
             arr[1] = 0
+
         else:
-            cnt = (arr[1]*1)//36 + 1
+            cnt = (arr[1])//36 + 1
 
         return cnt
 
