@@ -1,46 +1,49 @@
-def bfs(i,j):
+def bfs():
+    answer = 0
+    day = 0
+    
+    dx = [1,-1,0,0,0,0]
+    dy = [0,0,1,-1,0,0]
+    dz = [0,0,0,0,1,-1]
+    
+    while h:
+        day,z,x,y = heappop(h)
+        for i in range(6):
+            a,b,c, = x+dx[i] , y+dy[i] , z+dz[i]
+            if 0<=a<N and 0<=b<M and 0<=c<K and not visited[c][a][b]:
+                visited[c][a][b] = 1
+                if arr[c][a][b] == 0:
+                    arr[c][a][b] = 1
+                    heappush(h,[day+1,c,a,b])
 
-    count = 1
-    d = deque()
-    d.append([i,j])
-    visited[i][j] = 1
-
-    dx = [1,-1,0,0]
-    dy = [0,0,1,-1]
-
-    while d:
-        x,y = d.popleft()
-
-        for k in range(4): 
-            a,b = x+dx[k],y+dy[k]
-      
-            if 0<=a<N and 0<=b<N and not visited[a][b]:
-                visited[a][b] = 1
-                if arr[a][b] == '1':
-                    d.append([a,b])
-                    count += 1
-
-    return count 
+    answer = day
+    return answer
+        
 
 from collections import deque
+from heapq import heappop,heappush
 import sys
 input = sys.stdin.readline
 
+M,N,K = map(int,input().split())
 
-N = int(input())
-arr = [list(input()) for _ in range(N)]
+arr = [[list(map(int,input().split())) for _ in range(N)] for i in range(K)]
+visited = [[[0]*M for _ in range(N)] for i in range(K)]
 
-answer = []
+h = []
 
-visited = [[0]*N for _ in range(N)]
+for k in range(K):
+    for i in range(N):
+        for j in range(M):
+            if arr[k][i][j] == 1:
+                h.append([0,k,i,j])
+answer_day = bfs()
 
-for i in range(N):
-    for j in range(N):
-        if visited[i][j] == 0 and arr[i][j] == '1':
-            cnt = bfs(i,j)
-            answer.append(cnt)
+for k in range(K):
+    for i in range(N):
+        for j in range(M):
+            if arr[k][i][j] == 0:
+                print(-1)
+                exit()
 
-
-print(len(answer))
-for i in sorted(answer):
-    print(i)
+print(answer_day)
