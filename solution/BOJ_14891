@@ -44,8 +44,8 @@ def search_roll_num_dic():
 
 def roll(num,roll_num,roll_flag):
     search_index = 0
-    print('num',num+1,roll_num)
-    print(dic)
+    # print('num',num+1,roll_num)
+    # print(dic)
     if roll_flag:
         roll_flag = False
         roll_topni(num,roll_num)
