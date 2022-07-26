@@ -7,12 +7,11 @@ def bfs():
         for h in home:
             chicken_distance = float('inf')
             home_x,home_y = h[0],h[1]
-            # print(home_x,home_y)
             for cj in chicken_jip:
                 chicken_x,chicken_y = cj[0],cj[1]
                 distance = abs(home_x-chicken_x) + abs(home_y-chicken_y)
                 chicken_distance = min(chicken_distance,distance)
-            # print(chicken_distance)
+     
             city_distance += chicken_distance
         answer = min(answer,city_distance)
         # print(answer)
@@ -35,7 +34,7 @@ for i in range(N):
             chicken.append([i,j]) 
 
 chicken_list = list(combinations(chicken,M))
-print(chicken_list)
+
 m = bfs()
 
 print(m)
