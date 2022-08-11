@@ -1,50 +1,31 @@
-
-def command(n,i,x):
-    if n == 1:
-        if not arr[i][x]:
-            arr[i][x] = 1
-    elif n == 2:
-        if arr[i][x]:
-            arr[i][x] = 0
-    elif n == 3:
-        
-        for j in range(19,-1,-1):
-            if arr[i][j]:
-                if j == 19:
-                    arr[i][j] = 0
-                else:
-                    arr[i][j] = 0
-                    arr[i][j+1] = 1
-    else:
-        for j in range(0,20):
-            if arr[i][j]:
-                if j == 0:
-                    arr[i][j] = 0
-                else:
-                    arr[i][j] = 0
-                    arr[i][j-1] = 1
-
 import sys
 input = sys.stdin.readline
-N,M = map(int,input().split())
 
-visited = []
-arr  = [[0]*(20) for _ in range(N)]
+n = int(input())
 
-for _ in range(M):
-    comm = list(map(int,input().split()))
-    if len(comm) == 3:
-        n,i,x = comm[0],comm[1],comm[2]
-    else:
-        n,i,x = comm[0],comm[1],0
-    
-    command(n,i-1,x)
+dp = [0]*(10**6+1)
 
-answer = 0
+dp[1] = 0
+dp[2] = 1
+dp[3] = 1
 
-for i in range(N):
-    if arr[i] not in visited:
-        visited.append(arr[i])
-        answer += 1
+if n<=3:
+    print(dp[n])
+else:
+    for i in range(4,n+1):
+        
+        if i%3 == 0:
+            if i%2 == 0:
+                dp[i] = min(dp[i-1],dp[i//2],dp[i//3]) + 1
+            else:
+                dp[i] = min(dp[i-1],dp[i//3]) + 1
+        elif i%2 == 0: 
+            dp[i] = min(dp[i-1],dp[i//2]) + 1
 
-print(answer)
+        else:
+            dp[i] = dp[i-1]+1
+
+
+    print(dp[n])
+
+
