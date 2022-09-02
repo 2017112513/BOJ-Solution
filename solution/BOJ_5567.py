@@ -1,4 +1,3 @@
-from re import L
 import sys
 input = sys.stdin.readline
 N = int(input())
@@ -29,9 +28,10 @@ def bfs():
                 d.append([friend,cnt+1])
 
     return visited
+
 v = bfs()
 
-print(v)
+print(v.count(1)-1)
 
 
 
