@@ -1,13 +1,13 @@
 
 
-def get_nextxy(i,j,x):
+def get_nextxy(i,j,x): # 방향에 대한 다음 x y 좌표 반환 
     dx = [0,-1,-1,0,1,1,1,0,-1]
     dy = [0,0,-1,-1,-1,0,1,1,1]
 
     return i+dx[x],j+dy[x]
 
 
-def fish_rotate(array,sx,sy):
+def fish_rotate(array,sx,sy): # 물고기 돌리는 함수 
     dic  = {} 
     for i in range(4):
         for j in range(4):
@@ -21,9 +21,6 @@ def fish_rotate(array,sx,sy):
 
         x,y,dir = dic[fish][0],dic[fish][1],dic[fish][2]
 
-        # if array[x][y] == 0:
-        #     continue
-
         while 1:
             
             next_x,next_y = get_nextxy(x,y,dir)
@@ -35,7 +32,7 @@ def fish_rotate(array,sx,sy):
                     array[next_x][next_y] = [fish,dir]
                     array[x][y] = 0
                     dic[fish] = [next_x,next_y,dir]
-                    print(fish,'blank')
+      
                     break
                 else:
                         
@@ -45,7 +42,7 @@ def fish_rotate(array,sx,sy):
 
                     dic[fish] = [next_x,next_y,dir]
                     dic[change_fish] = [x,y,dic[change_fish][2]]
-                    print(fish,change_fish)
+
 
                     
 
@@ -57,15 +54,6 @@ def fish_rotate(array,sx,sy):
                     dir = dir +1 
 
     return array
-
-
-
-# 1  2  3  4  5  6  7  8
-# ↑, ↖, ←, ↙, ↓, ↘, →, ↗
-
-
-
-
 
 
 from collections import deque
@@ -99,24 +87,18 @@ def bfs():
 
     while d:
 
-        print('===========================')
+
 
         sx,sy,sd,weight,curr_arr = d.popleft()
         curr_arr[sx][sy] = 0
 
         answer = max(answer,weight)
-   
-        print(sx,sy,sd,weight)
 
-        for z in curr_arr:
-            print(z)
+ 
                 
         new_arr = fish_rotate(deepcopy(curr_arr),sx,sy)
         
     
-        print('22@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-        for z in new_arr:
-            print(z)
         
         can_eat_fish = []
 
@@ -129,8 +111,6 @@ def bfs():
                     f,fd = new_arr[next_sx][next_sy]
                     can_eat_fish.append([f,fd,next_sx,next_sy])
 
-                else:
-                    can_eat_fish.append([0,sd,next_sx,next_sy])
 
                 temp_sx,temp_sy = next_sx,next_sy
 
@@ -138,15 +118,11 @@ def bfs():
                 break
         
         for move_to_fish,next_dir,next_sx,next_sy in can_eat_fish:
-            print(move_to_fish)
+
             d.append([next_sx,next_sy,next_dir,weight+move_to_fish,deepcopy(new_arr)])
 
 
-        # if input() == '':
-        #     pass
-    return weight
-
-            
+    return answer
 
 
 a = bfs()
