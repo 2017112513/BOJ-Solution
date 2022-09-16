@@ -56,32 +56,6 @@ def fish_rotate(array,sx,sy): # 물고기 돌리는 함수
     return array
 
 
-from collections import deque
-from copy import deepcopy
-import sys
-
-input = sys.stdin.readline
-
-arr = [[0]*4 for _ in range(4)]
-
-for idx, _ in enumerate(range(4)):
-    a1,a2,b1,b2,c1,c2,d1,d2 = map(int,input().split())
-    arr[idx][0] = [a1,a2]
-    arr[idx][1] = [b1,b2]
-    arr[idx][2] = [c1,c2]
-    arr[idx][3] = [d1,d2]
-
-
-
-sx,sy = 0,0
-weight,shark_d = arr[0][0][0],arr[0][0][1]
-arr[0][0] = 0
-
-d = deque()
-d.append([sx,sy,shark_d,weight,arr])
-
-
-
 def bfs():
     answer = 0
 
@@ -124,6 +98,31 @@ def bfs():
 
     return answer
 
+
+
+from collections import deque
+from copy import deepcopy
+import sys
+
+input = sys.stdin.readline
+
+arr = [[0]*4 for _ in range(4)]
+
+for idx, _ in enumerate(range(4)):
+    a1,a2,b1,b2,c1,c2,d1,d2 = map(int,input().split())
+    arr[idx][0] = [a1,a2]
+    arr[idx][1] = [b1,b2]
+    arr[idx][2] = [c1,c2]
+    arr[idx][3] = [d1,d2]
+
+
+
+sx,sy = 0,0
+weight,shark_d = arr[0][0][0],arr[0][0][1]
+arr[0][0] = 0
+
+d = deque()
+d.append([sx,sy,shark_d,weight,arr])
 
 a = bfs()
 
