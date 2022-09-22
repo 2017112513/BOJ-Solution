@@ -44,7 +44,6 @@ for i in range(N):
             
             c = bfs(i,j)
 
-            print(i,j,c)
             answer = max(answer,c)
           
 print(answer)

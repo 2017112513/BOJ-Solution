@@ -42,7 +42,7 @@ for q in query:
 
     cnt = len(lis)-s
 
-    print(cnt)
+    answer.append(cnt)
 
 
 
