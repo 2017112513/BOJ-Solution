@@ -1,3 +1,1 @@
-arr = [['a','a'],['a']]
-
-print(sorted(arr))
+print(bool(''))
