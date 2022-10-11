@@ -3,7 +3,7 @@ def dijkstra():
     h = [] 
     h.append([0,s])
 
-    weight = [int(1e9)] * (n+1)
+    weight = [INF] * (n+1)
     weight[s] = 0 
 
     while h:
@@ -15,7 +15,7 @@ def dijkstra():
         for next_weight,next_node in dic[curr_node]:
             new_weight = curr_weight + next_weight
 
-            if new_weight<=weight[next_node]:
+            if new_weight<weight[next_node]:
                 weight[next_node] = new_weight
                 heappush(h,[new_weight,next_node])
 
@@ -26,7 +26,7 @@ import sys
 input = sys.stdin.readline
 from collections import defaultdict
 from heapq import heappush,heappop
-
+INF = int(1e9)
 for i in range(int(input())):
     dic = defaultdict(list)
     n,m,t = map(int,input().split())
@@ -50,8 +50,8 @@ for i in range(int(input())):
     weight_lst = dijkstra()
     answer = []
     for hb in hubo: 
-        if type(weight_lst[hb]) is float :
+        if weight_lst[hb]!= INF and type(weight_lst[hb]) == float :
             answer.append(hb)
     answer.sort()
 
-    print('aswer',*answer)
+    print(*answer)
