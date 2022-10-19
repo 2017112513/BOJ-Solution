@@ -59,11 +59,11 @@ def main():
 
                 unionParent(root,n1,n2)
                 total+=1
-                print('nnd,',n1,n2,dis)
+                print(n1,n2,dis)
                 save_cost += dis
 
         
-        print('answer',cost-save_cost-1)
+        print(cost-save_cost)
 
 main()
     
