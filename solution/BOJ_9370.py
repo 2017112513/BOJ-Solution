@@ -1,57 +1,73 @@
+def if_flag(search_road , flag, new_node):
+    if not flag:
+        if len(search_road):
+            if (search_road == str(road_1) and new_node == road_2) or (search_road == str(road_2) and new_node == road_1) : 
+                search_road = ''
+                flag = True
+            else:
+                search_road = str(new_node)
+                
+        else:
+            search_road =str(new_node)
+    return search_road , flag 
+        
 def dijkstra():
-    
-    h = [] 
-    h.append([0,s])
 
-    weight = [INF] * (n+1)
-    weight[s] = 0 
-
+    weight = [float('inf')]*(n+1)
+    heappush(h,[0,s,'',False]) # True면 도로를 지나왔다는 뜻  
+    if_road = [False]*(n+1)
+    weight[s] = 0
     while h:
-        curr_weight , curr_node = heappop(h)
 
-        if curr_weight>weight[curr_node]:
+        curr_wei,curr_node,search_road,flag = heappop(h)
+    
+        if curr_wei > weight[curr_node]:
             continue
-            
-        for next_weight,next_node in dic[curr_node]:
-            new_weight = curr_weight + next_weight
 
-            if new_weight<weight[next_node]:
-                weight[next_node] = new_weight
-                heappush(h,[new_weight,next_node])
+        for new_wei,new_node in dic[curr_node]:
+            wei = new_wei+curr_wei
+            if weight[new_node]>=wei:
+                new_search_road , new_flag = if_flag(search_road,flag,new_node)
 
-    return weight
+                weight[new_node] = wei
+                if_road[new_node] = new_flag
+
+                heappush(h,[wei,new_node,new_search_road,new_flag])
+
+    
+
+    return weight,if_road
+
+
+
 
 
 import sys
-input = sys.stdin.readline
+input = sys.stdin.readline 
 from collections import defaultdict
 from heapq import heappush,heappop
-INF = int(1e9)
 for i in range(int(input())):
+    
     dic = defaultdict(list)
-    n,m,t = map(int,input().split())
-    s,g,h = map(int,input().split())
+    n,m,t = map(int,input().split()) 
+    s,road_1,road_2 = map(int,input().split())
 
-    for _ in range(m):
-        a,b,c = map(int,input().split())
-        dic[a].append([c,b])
-        dic[b].append([c,a]) #거리, 도착노드 
+    h = []
 
-    hubo = [int(input()) for _ in range(t)]
-
-    for i in dic[g]:
-        if i[1] == h:
-            i[0] -= 0.1 
+    for _ in range(m): 
+        a,b,d = map(int,input().split())
         
-    for i in dic[h]:
-        if i[1] == g:
-            i[0] -= 0.1
+        dic[a].append((d,b))
+        dic[b].append((d,a))
 
-    weight_lst = dijkstra()
-    answer = []
-    for hb in hubo: 
-        if weight_lst[hb]!= INF and type(weight_lst[hb]) == float :
-            answer.append(hb)
-    answer.sort()
+    ins = [int(input()) for _ in range(t)]
+    
 
-    print(*answer)
+    
+
+    weight,if_road = dijkstra()
+
+    if_road = [idx for idx, bl in enumerate(if_road) if bl and idx in ins]
+
+    print(*if_road,'answer')
+
