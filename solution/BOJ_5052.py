@@ -7,7 +7,7 @@ for _ in range(T):
     flag = False    
     n = int(input())
     arr = list((input().strip() for _ in range(n)))
-
+    
     dic = defaultdict(int)
     for number in arr:
         S = ''

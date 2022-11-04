@@ -1,1 +1,1 @@
-print('BAABAAAAAB'.lstrip('BA'))
+print('string'[0])
