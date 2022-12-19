@@ -158,7 +158,7 @@ if __name__ == "__main__":
         copy_arr,index_count,transform = search_group()
         score = calculate_collaborate_score()
         answer+=score
-        print(score)
+
         arr = copy_arr
         arr = roll()
     
