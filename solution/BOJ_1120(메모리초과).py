@@ -8,6 +8,7 @@ def bfs(answer):
 
         if len(x)<len(B):  
             for ascii in range(97,122+1):
+                
                 if visited[x + chr(ascii)] == 0:
                     visited[x + chr(ascii)] = 1
                     d.append(x + chr(ascii))
