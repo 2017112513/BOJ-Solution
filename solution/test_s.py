@@ -1,44 +1,62 @@
-arr = [4,5]
+def is_inner(x,y):
+    if 0<=x<N and 0<=y<M:
+        return True
+    return False
 
+def gram(x,y):
+    return abs(N-1-x) + abs(M-1-y)
 
-def solution(arr):
+def bfs():
+
+    dx = [1,-1,0,0]
+    dy = [0,0,1,-1]
+
+    d= deque()
+    d.append((0,0,0)) # T , X , Y 
+    visited = [[0]* M for _ in range(N)]
+    visited[0][0] = 1
+    temp = int(10**9)
     
-    def f(array):
+    while d:
+        t,x,y = d.popleft()
 
-        if len(array)%2==0: # 배열의 길이가 짝수일경우
-            
-            n = len(array)//2
+        if x == N-1 and y == M-1:
 
-            temp_1 = array[:n]
-            temp_1 = temp_1[::-1]
+            answer=min(t,temp)
 
-            temp_2 = array[n:]
-            temp_2 = temp_2[::-1]
+            if answer <= T:
+                return answer
 
-        else:
-            n = len(array)//2
+        for i in range(4):
+            a,b = x+dx[i],y+dy[i]
+            if is_inner(a,b) and not visited[a][b] and arr[a][b] != 1:
+                if arr[a][b] == 0:
+                    visited[a][b] = 1
+                    d.append((t+1,a,b))
+                else:
+                    visited[a][b] = 1
+                    temp = t + gram(a,b) + 1 
+                    if temp <= T :
+                        answer= temp
+  
+    if temp <= T : 
+        return temp 
 
-            temp_1 = array[:n+1]
-            temp_1 = temp_1[::-1]
+    return False
+                    
+                 
 
-            temp_2 = array[n+1:]
-            temp_2 = temp_2[::-1]
+if __name__ == '__main__':
+    import sys
+    from collections import deque
 
-        return temp_1,temp_2
 
-    if len(arr) == 1:
-        return arr
+    input = sys.stdin.readline
 
-    arr = arr[::-1] # 1단계 : 배열을 뒤집는 함수
-    answer = []
-
-    temp_1,temp_2 = f(arr)
-
-    ans_1,ans_2 = f(temp_1)
-    ans_3,ans_4 = f(temp_2)
+    N,M,T = map(int,input().split())
     
-    answer = ans_1+ans_2+ans_3+ans_4
-    return answer
+    arr = [list(map(int,input().split())) for _ in range(N)]
 
-a= solution(arr)
-print(a)
+    answer = bfs()
+
+    print(answer if answer else "Fail")
