@@ -8,11 +8,12 @@ def bfs():
     d = deque()
     visited = defaultdict(int)
     visited[str(home_x) + str(home_y)] = 1
+
     d.append((home_x,home_y,visited))
 
     while d:
         x,y,vis = d.popleft()
-
+        
         if is_inner(x,y,target_x,target_y):
             return 'happy'
 
@@ -37,11 +38,7 @@ if __name__ == '__main__':
         
         home_x,home_y = map(int,input().split())
         
-        store_list = []
-        for _ in range(store_cnt):
-            x,y = map(int,input().split())
-            if is_inner(x,y,home_x,home_y):
-                store_list.append((x,y))
+        store_list = [list(map(int,input().split())) for _ in range(store_cnt)]
                 
         target_x,target_y = map(int,input().split())
 
