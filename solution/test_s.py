@@ -1,62 +1,108 @@
+def get_virus():
+
+    virus = [] 
+    zero = 0
+    for i in range(N):
+        for j in range(N):
+            if arr[i][j] == 2:
+                virus.append([i,j])
+            elif arr[i][j] ==0:
+                zero += 1
+    return virus ,zero
+
 def is_inner(x,y):
-    if 0<=x<N and 0<=y<M:
+    if 0<=x<N and 0<=y<N:
         return True
     return False
+    
 
-def gram(x,y):
-    return abs(N-1-x) + abs(M-1-y)
-
-def bfs():
+def bfs(d,copy_arr,visited,cnt):
 
     dx = [1,-1,0,0]
     dy = [0,0,1,-1]
-
-    d= deque()
-    d.append((0,0,0)) # T , X , Y 
-    visited = [[0]* M for _ in range(N)]
-    visited[0][0] = 1
-    temp = int(10**9)
-    
+    day = 0
     while d:
-        t,x,y = d.popleft()
+        curr_day,x,y = d.popleft()
 
-        if x == N-1 and y == M-1:
-
-            answer=min(t,temp)
-
-            if answer <= T:
-                return answer
+        day = max(day,curr_day)
 
         for i in range(4):
             a,b = x+dx[i],y+dy[i]
             if is_inner(a,b) and not visited[a][b] and arr[a][b] != 1:
-                if arr[a][b] == 0:
-                    visited[a][b] = 1
-                    d.append((t+1,a,b))
-                else:
-                    visited[a][b] = 1
-                    temp = t + gram(a,b) + 1 
-                    if temp <= T :
-                        answer= temp
-  
-    if temp <= T : 
-        return temp 
 
-    return False
-                    
-                 
+                if copy_arr[a][b] == 0:
+        
+                    copy_arr[a][b] = 2
+                    visited[a][b] = 1
+                    cnt -= 1
+                    d.append((curr_day+1,a,b))
+                
+                elif copy_arr[a][b] == 2:
+                    visited[a][b] = 1
+                    d.append((curr_day+1,a,b))
+
+                if cnt == 0:
+                    return curr_day+1
+            
+
+    if cnt>0:
+        return -1 
+
 
 if __name__ == '__main__':
     import sys
-    from collections import deque
-
+    from collections import deque,defaultdict
+    from itertools import combinations
+    from copy import deepcopy 
 
     input = sys.stdin.readline
 
-    N,M,T = map(int,input().split())
-    
+    N,K = map(int,input().split())
+
     arr = [list(map(int,input().split())) for _ in range(N)]
 
-    answer = bfs()
+    virus , zero = get_virus()
 
-    print(answer if answer else "Fail")
+    c_list = list(combinations(virus,K))
+
+    
+
+    INF = 10**9
+    ans = INF
+    flag = True
+    if zero == 0:
+        print(0)
+    else:
+        for c in c_list:
+            temp_cnt = zero
+            d = deque()
+            copy_arr = deepcopy(arr)
+            visited  = [[0]*N for _ in range(N)]
+            
+            for i,j in c:
+                d.append((0,i,j))
+                visited[i][j] = 1
+            
+            
+            answer = bfs(d,copy_arr,visited,temp_cnt)
+            # print(answer)
+
+            if answer != -1:
+                if flag:
+                    ans = answer
+                    flag = False
+                else:
+                    ans = min(answer,ans)
+            elif answer == -1:
+                if flag:
+                    ans = -1 
+            
+
+        print(ans)
+
+
+
+
+
+    
+
