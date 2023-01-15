@@ -59,9 +59,8 @@ def solution(arr,target):
         
         
 
-    
-
 if __name__ == '__main__':
+    
     import sys 
     from collections import deque,defaultdict
     from copy import deepcopy
