@@ -1,1 +1,1 @@
-print('w'.upper())
+print('w'.isupper())
