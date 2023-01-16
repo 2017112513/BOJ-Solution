@@ -1,7 +1,12 @@
-N = int(input())
-dp = [[0 for i in range(10)]for j in range(1001)]
-dp[1] = [1,1,1,1,1,1,1,1,1,1]
-for i in range(2,N+1):
-    for j in range(10):
-        dp[i][j] = sum(dp[i-1][0:j+1])
-print(sum(dp[N]) % 10007)
+import sys
+n = int(sys.stdin.readline().strip())
+a = [int(x) for x in sys.stdin.readline().split()]
+dp = a[:]
+
+for i in range(n):
+    for j in range(i):
+        if a[i] > a[j]:
+            print(i,j,dp)
+            dp[i] = max(dp[i], dp[j] + a[i])
+
+print(max(dp))
