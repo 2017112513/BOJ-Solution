@@ -15,7 +15,7 @@ def dijkstra():
     visited = [1e9] * (N+1)
     visited[1] = 0
     heappush(h,(0,1))
-    print(dic)
+
     while h:
         
         cow,x = heappop(h)
@@ -30,8 +30,6 @@ def dijkstra():
                 visited[next_x] = temp
     
                 heappush(h,(temp,next_x))
-
-    print(visited)
     
 if __name__ == '__main__':
     
