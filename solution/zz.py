@@ -1,1 +1,3 @@
-print(['dasd']+['dawd'])
+import math 
+
+print(math.sqrt(82))
