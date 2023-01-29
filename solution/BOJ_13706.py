@@ -7,9 +7,9 @@ def binary_search(N):
     left = 1
 
 
-    while left<right:
+    while left<=right:
         mid = (left + right)  // 2
-        print(left,right)
+ 
         temp = mid**2
 
         if temp == N:
