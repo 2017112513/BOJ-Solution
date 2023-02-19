@@ -82,3 +82,10 @@ if __name__ == '__main__':
             answer += 2**i
     
     print(answer)
+        
+
+    
+
+    
+
+
