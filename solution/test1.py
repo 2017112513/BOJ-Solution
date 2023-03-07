@@ -1,71 +1,25 @@
-from collections import defaultdict
-from collections import deque 
-def bfs(N,begin,target,arr):
+from collections import deque ,defaultdict
+
+prices = [1,2,3,2,3]
+
+def solution(prices):
+    answer = [] 
+    
+    #인덱스를 Key로 담는 True/False 딕셔너리 
+    idx_price = {key: True for key, value in enumerate(prices)}
+    #가격을 Key , 인덱스 리스트를 Value로 하는 딕셔너리 하나 
+    price_dic = defaultdict(list)
+
+    for idx, i in enumerate(prices):
+        price_dic[i].append(idx)
+
+    print(idx_price)
+    print(price_dic)
+     
     
     
-    d = deque()
-    visited = [0]*N
-    visited[begin] = 1
-    d.append((0,begin,visited))
-    
-    for z in arr:
-        print(z)
-    answer = 10**9
-    
-    while d:
-        cnt,word_number,temp_visited = d.popleft()
-        if word_number == target:
+    return answer 
 
-            answer = min(answer,cnt)
-
-        for i in range(N):
-            if arr[word_number][i] == 1 and temp_visited[i] == 0:
-                temp_visited[i] = 1
-                d.append((cnt+1,i,temp_visited))
-                
-    if answer == 10**9:
-        return 0 
-    return answer
-            
-def solution(begin, target, words):
-
-    if target not in words:
-        return 0
-    
-    N = len(words)
-    arr = [[0]*N for _ in range(N)]
-    
-    words_dict = defaultdict(int)
-    for i in range(len(words)):
-        words_dict[i] = words[i]
-        if words[i] == begin: 
-            b_number = i 
-
-        if words[i] == target: 
-            t_number = i 
-
-        for j in range(len(words)):
-            if i == j : 
-                continue
-            p , q = words[i] , words[j]
-            cnt = 0
-            for left, right in zip(p,q):
-
-                if left != right:
-                    cnt += 1
-
-            arr[i][j] = cnt 
-            arr[j][i] = cnt
-
-    #=============================
-
-    answer = bfs(N,b_number,t_number,arr)
-    return answer
-
-begin = 'hit'
-target = 'cog'
-words = ["hot", "dot", "dog", "lot", "log", "cog"]
-words.append(begin)
-a = solution(begin,target,words)
+a = solution(prices)
 
 print(a)
